@@ -94,7 +94,16 @@ try {
         $config = Get-Content $configPath -Raw | ConvertFrom-Json
         $config.models.providers.lmstudio.models[0].id = $actualModelId
         $config.models.providers.lmstudio.models[0].name = "LM Studio: $actualModelId"
-        $config.agent.model = "lmstudio/$actualModelId"
+        
+        # Use the correct structure: agents.defaults.models (array)
+        if (-not $config.agents) {
+            $config | Add-Member -MemberType NoteProperty -Name "agents" -Value ([PSCustomObject]@{})
+        }
+        if (-not $config.agents.defaults) {
+            $config.agents | Add-Member -MemberType NoteProperty -Name "defaults" -Value ([PSCustomObject]@{})
+        }
+        $config.agents.defaults | Add-Member -MemberType NoteProperty -Name "models" -Value @("lmstudio/$actualModelId") -Force
+        
         $config | ConvertTo-Json -Depth 10 | Set-Content $configPath
         Write-Host "[+] Updated config to use model: $actualModelId" -ForegroundColor Green
     }
