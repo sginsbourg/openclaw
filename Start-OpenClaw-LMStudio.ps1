@@ -95,14 +95,17 @@ try {
         $config.models.providers.lmstudio.models[0].id = $actualModelId
         $config.models.providers.lmstudio.models[0].name = "LM Studio: $actualModelId"
         
-        # Use the correct structure: agents.defaults.models (array)
+        # Use the correct structure: agents.defaults.model.primary
         if (-not $config.agents) {
             $config | Add-Member -MemberType NoteProperty -Name "agents" -Value ([PSCustomObject]@{})
         }
         if (-not $config.agents.defaults) {
             $config.agents | Add-Member -MemberType NoteProperty -Name "defaults" -Value ([PSCustomObject]@{})
         }
-        $config.agents.defaults | Add-Member -MemberType NoteProperty -Name "models" -Value @("lmstudio/$actualModelId") -Force
+        if (-not $config.agents.defaults.model) {
+            $config.agents.defaults | Add-Member -MemberType NoteProperty -Name "model" -Value ([PSCustomObject]@{})
+        }
+        $config.agents.defaults.model | Add-Member -MemberType NoteProperty -Name "primary" -Value "lmstudio/$actualModelId" -Force
         
         $config | ConvertTo-Json -Depth 10 | Set-Content $configPath
         Write-Host "[+] Updated config to use model: $actualModelId" -ForegroundColor Green
@@ -127,7 +130,7 @@ Start-Sleep -Seconds 2
 Write-Host "[*] Starting OpenClaw Gateway..." -ForegroundColor Green
 $gatewayScript = @"
 cd '$PWD'
-pnpm openclaw gateway --port 18789 --verbose
+pnpm openclaw gateway --port 18789 --verbose --allow-unconfigured --token lmstudio-local
 "@
 
 Start-Process powershell -ArgumentList "-NoExit", "-Command", $gatewayScript
