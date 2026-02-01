@@ -142,9 +142,11 @@ Start-Sleep -Seconds 5
 Write-Host "[*] Testing connection to LM Studio..." -ForegroundColor Yellow
 Start-Sleep -Seconds 2
 
-# 7. Open browser to UI
+# 7. Open browser to UI with token
 Write-Host "[*] Opening Control UI in browser..." -ForegroundColor Cyan
-Start-Process "http://localhost:18789"
+$uiUrl = "http://localhost:18789/?token=lmstudio-local"
+Write-Host "    URL: $uiUrl" -ForegroundColor Gray
+Start-Process $uiUrl
 
 # 8. Start interactive agent
 Write-Host "`n[*] Starting interactive agent session..." -ForegroundColor Green
