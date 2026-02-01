@@ -114,7 +114,7 @@ Get-Process -Name "node" -ErrorAction SilentlyContinue | Where-Object {
 } | Stop-Process -Force -ErrorAction SilentlyContinue
 Start-Sleep -Seconds 2
 
-# 3. Start Gateway in new window
+# 5. Start Gateway in new window
 Write-Host "[*] Starting OpenClaw Gateway..." -ForegroundColor Green
 $gatewayScript = @"
 cd '$PWD'
@@ -126,15 +126,15 @@ Start-Process powershell -ArgumentList "-NoExit", "-Command", $gatewayScript
 Write-Host "[*] Waiting for Gateway to initialize..." -ForegroundColor Yellow
 Start-Sleep -Seconds 5
 
-# 4. Test the connection
+# 6. Test the connection
 Write-Host "[*] Testing connection to LM Studio..." -ForegroundColor Yellow
 Start-Sleep -Seconds 2
 
-# 5. Open browser to UI
+# 7. Open browser to UI
 Write-Host "[*] Opening Control UI in browser..." -ForegroundColor Cyan
 Start-Process "http://localhost:18789"
 
-# 6. Start interactive agent
+# 8. Start interactive agent
 Write-Host "`n[*] Starting interactive agent session..." -ForegroundColor Green
 Write-Host "You can now chat with your local LM Studio model!" -ForegroundColor Cyan
 Write-Host "----------------------------------------------------" -ForegroundColor Gray
