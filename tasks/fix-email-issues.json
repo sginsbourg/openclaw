@@ -1,0 +1,96 @@
+{
+  "name": "Fix Email Issues",
+  "description": "Fix Gmail SMTP configuration and send test email to sginsbourg@gmail.com",
+  "priority": "high",
+  "status": "pending",
+  "assigned_to": "ai-agent",
+  "deadline": "ASAP",
+  "tags": ["email", "gmail", "smtp", "bugzilla", "wps-challengers"],
+  "steps": [
+    {
+      "step": 1,
+      "title": "Diagnose Gmail SMTP Issues",
+      "description": "Run comprehensive diagnosis of Gmail SMTP configuration issues",
+      "actions": [
+        "Test network connectivity to smtp.gmail.com:587",
+        "Verify Gmail account security settings",
+        "Check App Password validity",
+        "Test Windows CDO.Message authentication",
+        "Identify firewall/antivirus blocking"
+      ],
+      "expected_result": "Clear diagnosis of root cause",
+      "status": "pending"
+    },
+    {
+      "step": 2,
+      "title": "Configure Gmail Settings",
+      "description": "Fix identified Gmail configuration issues",
+      "actions": [
+        "Enable 'Less secure apps' in Google Account settings",
+        "Generate new 16-character App Password if needed",
+        "Update Windows firewall to allow SMTP outbound",
+        "Configure antivirus to exclude email scanning",
+        "Test with alternative SMTP settings"
+      ],
+      "expected_result": "Gmail SMTP working correctly",
+      "status": "pending"
+    },
+    {
+      "step": 3,
+      "title": "Send Test Email",
+      "description": "Send test email to sginsbourg@gmail.com to verify fixes",
+      "actions": [
+        "Create test email with proper formatting",
+        "Send via multiple methods (CDO.Message, PowerShell, Python)",
+        "Verify delivery to inbox",
+        "Check for bounce-backs or error messages"
+      ],
+      "expected_result": "Email successfully received in sginsbourg@gmail.com inbox",
+      "status": "pending"
+    },
+    {
+      "step": 4,
+      "title": "Verify Bugzilla Email Integration",
+      "description": "Ensure Bugzilla email notifications work with fixed Gmail",
+      "actions": [
+        "Test Bugzilla email configuration",
+        "Create test bug to trigger notification",
+        "Verify email delivery from Bugzilla",
+        "Check email queue status"
+      ],
+      "expected_result": "Bugzilla emails working with Gmail",
+      "status": "pending"
+    },
+    {
+      "step": 5,
+      "title": "Document Solution",
+      "description": "Create documentation of the fix and verification steps",
+      "actions": [
+        "Document root cause analysis",
+        "Record all configuration changes made",
+        "Create troubleshooting guide",
+        "Update WPS-Challengers documentation"
+      ],
+      "expected_result": "Complete solution documentation",
+      "status": "pending"
+    }
+  ],
+  "tools_needed": [
+    "Windows Command Prompt",
+    "PowerShell",
+    "curl",
+    "telnet",
+    "Gmail Account Settings",
+    "Windows Firewall",
+    "Antivirus Software"
+  ],
+  "success_criteria": [
+    "Test email received in sginsbourg@gmail.com inbox",
+    "Gmail SMTP authentication working",
+    "Bugzilla email notifications working",
+    "No error messages in logs",
+    "All diagnostic tests passing"
+  ],
+  "created_at": "2026-02-14T19:35:00Z",
+  "updated_at": "2026-02-14T19:35:00Z"
+}

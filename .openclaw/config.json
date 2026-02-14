@@ -1,0 +1,45 @@
+{
+  "models": {
+    "default": "ollama-llama3.2",
+    "providers": {
+      "ollama": {
+        "enabled": true,
+        "baseUrl": "http://localhost:11434",
+        "models": ["llama3.2", "gemma3:12b", "glm-4.7-flash:latest"],
+        "defaultModel": "llama3.2"
+      },
+      "lmstudio": {
+        "enabled": true,
+        "baseUrl": "http://localhost:1234/v1",
+        "models": ["llama-3.2-3b-instruct"],
+        "defaultModel": "llama-3.2-3b-instruct"
+      }
+    },
+    "fallback": {
+      "enabled": true,
+      "order": ["ollama", "lmstudio"]
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "host": "localhost",
+    "verbose": true
+  },
+  "channels": {
+    "webchat": {
+      "enabled": true
+    }
+  },
+  "skills": {
+    "autoLoad": true,
+    "registry": "local"
+  },
+  "security": {
+    "dmPolicy": "open",
+    "allowUntrusted": false
+  },
+  "logging": {
+    "level": "info",
+    "file": "logs/openclaw.log"
+  }
+}
